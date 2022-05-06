@@ -15,7 +15,7 @@ Module.register("MMM-OnlineImagesViewer",{
 	start: function() {
 		var self = this;
 		this.images = this.config.images;
-		Log.info(this.images);
+		Log.info(this.config.updateInterval);
 		this.loaded = false;
 		this.lastImageIndex = 0;
 		this.gridColumns = Array(this.config.numColumns).fill('auto').join(' ');
@@ -71,14 +71,12 @@ Module.register("MMM-OnlineImagesViewer",{
 
 			this.appendImage(wrapper, photoImageUrl);
 		}
-		
-		
 		return wrapper;
 	},
 
 	appendImage: function(wrapper, photoImageUrl) {
 		var img = document.createElement("img");
-		img.src = photoImageUrl;
+		img.src = photoImageUrl + "?t=" + new Date().getTime();;
 		img.style.maxWidth = this.config.maxWidth;
 		img.style.maxHeight = this.config.maxHeight;
 		img.style.opacity = this.config.opacity;
