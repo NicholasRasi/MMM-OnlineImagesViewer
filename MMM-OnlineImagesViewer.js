@@ -76,7 +76,10 @@ Module.register("MMM-OnlineImagesViewer",{
 
 	appendImage: function(wrapper, photoImageUrl) {
 		var img = document.createElement("img");
-		img.src = photoImageUrl + "?t=" + new Date().getTime();;
+		// get the photo image url and add a t parameter
+		let imgSrcURL = new URL(photoImageUrl);
+		imgSrcURL.searchParams.append('t', new Date().getTime());
+		img.src = imgSrcURL.href;
 		img.style.maxWidth = this.config.maxWidth;
 		img.style.maxHeight = this.config.maxHeight;
 		img.style.opacity = this.config.opacity;
